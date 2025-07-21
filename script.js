@@ -93,3 +93,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Mobile Menu Functions
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.toggle('active');
+    
+    if (mobileMenu.classList.contains('active')) {
+        document.body.classList.add('no-scroll');
+    } else {
+        document.body.classList.remove('no-scroll');
+    }
+}
+
+// Close mobile menu when clicking outside or on menu items
+document.addEventListener('click', function(e) {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    
+    if (mobileMenu.classList.contains('active') && 
+        !mobileMenu.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+});
+
+// Ensure mobile menu is closed when window is resized to desktop size
+window.addEventListener('resize', function() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (window.innerWidth > 767 && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+});
